@@ -50,12 +50,18 @@ class Field:
                     return False
             else:
                 for i in self.rects[n]:
-                    if rect.left in range(i.left, i.right + 1) or rect.right in range(i.left, i.right + 1):
-                        if rect.top == i.bottom or rect.bottom == i.top:
+                    if rect.top == i.bottom or rect.bottom == i.top:
+                        if rect.left in range(i.left, i.right + 1) or rect.right in range(i.left, i.right + 1):
                             self.rects[n].append(rect)
                             return True
-                    if rect.top in range(i.top, i.bottom + 1) or rect.bottom in range(i.top, i.bottom + 1):
-                        if rect.left == i.right or rect.right == i.left:
+                        elif i.left in range(rect.left, rect.right + 1) or i.right in range(rect.left, rect.right + 1):
+                            self.rects[n].append(rect)
+                            return True
+                    if rect.left == i.right or rect.right == i.left:
+                        if rect.top in range(i.top, i.bottom + 1) or rect.bottom in range(i.top, i.bottom + 1):
+                            self.rects[n].append(rect)
+                            return True
+                        elif i.top in range(rect.top, rect.bottom + 1) or i.bottom in range(rect.top, rect.bottom + 1):
                             self.rects[n].append(rect)
                             return True
         return False
